@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="jbox2d-jni-broadphase/src/main/java"/>
+	<classpathentry kind="src" path="jbox2d-jni-broadphase/src/test/java"/>
+	<classpathentry excluding="org/jbox2d/gwtemul/" kind="src" path="jbox2d-library/src/main/java"/>
+	<classpathentry kind="src" path="jbox2d-library/src/main/java/org/jbox2d/gwtemul"/>
+	<classpathentry kind="src" path="jbox2d-library/src/test/java"/>
+	<classpathentry kind="src" path="jbox2d-serialization/src/generated"/>
+	<classpathentry kind="src" path="jbox2d-serialization/src/main/java"/>
+	<classpathentry kind="src" path="jbox2d-testbed-jogl/src/main/java"/>
+	<classpathentry kind="src" path="jbox2d-testbed/src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

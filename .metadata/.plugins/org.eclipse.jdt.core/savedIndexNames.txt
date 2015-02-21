@@ -1,27 +1,3 @@
-INDEX VERSION 1.126+/Users/Andrew/Dropbox/School/NCSSM/Junior Year/Clubs/Open Source/.metadata/.plugins/org.eclipse.jdt.core
-1384487945.index
-3796755423.index
-3521354349.index
-3910314713.index
-3712507179.index
-2545238116.index
-906371316.index
-156905802.index
-1894128083.index
+INDEX VERSION 1.126+/Users/Andrew/Dropbox/School/NCSSM/Junior Year 8.58.31 PM/Clubs/Open Source/.metadata/.plugins/org.eclipse.jdt.core
+1553579986.index
 364511309.index
-1770918486.index
-1207066652.index
-1819685514.index
-230271376.index
-3266567714.index
-1873703457.index
-1833648217.index
-3986925568.index
-2239375614.index
-1271342938.index
-3545806974.index
-3871202677.index
-3302703152.index
-3321539481.index
-3299947704.index
-3803267749.index
