@@ -1,0 +1,11 @@
+package framework;
+
+import jbox2d.common.Vec2;
+import jbox2d.dynamics.World;
+
+public class DefaultWorldCreator implements WorldCreator {
+  @Override
+  public World createWorld(Vec2 gravity) {
+    return new World(gravity);
+  }
+}

@@ -1,0 +1,15 @@
+import jbox2d.dynamics.*;
+
+import jbox2d.common.*;
+public class test {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Vec2 gravity = new Vec2(0.0f, -10.0f);
+		World world = new World(gravity);
+
+	}
+
+}
