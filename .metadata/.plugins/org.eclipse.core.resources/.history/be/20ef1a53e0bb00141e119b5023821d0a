@@ -41,9 +41,9 @@ public class test {
 		    world.step(timeStep, velocityIterations, positionIterations);
 		    Vec2 position = body.getPosition();
 		    float angle = body.getAngle();
-		    if(position.y < 0) {
+		    if(position.x < 0) {
+		    System.out.println("here");
 		    world.destroyBody(body);
-		    break;
 		    }
 		    System.out.printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
 

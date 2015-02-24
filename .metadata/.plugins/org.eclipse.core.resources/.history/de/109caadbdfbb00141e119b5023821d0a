@@ -2,9 +2,6 @@ import jbox2d.dynamics.*;
 
 import jbox2d.collision.shapes.*;
 import jbox2d.common.*;
-//This example code demonstrates a body,
-//a single fixture with the shape of a polygon, falling from the sky.
-//see google doc if you didn't understand that.
 public class test {
 
 	/**
@@ -20,12 +17,11 @@ public class test {
 		bodyDef.type = BodyType.DYNAMIC;
 		bodyDef.position.set(0.0f, 4.0f);
 		Body body = world.createBody(bodyDef);
-		//Creates a polygon shape
+		//adds a polygon shape to the body
 		PolygonShape dynamicBox = new PolygonShape();
 		dynamicBox.setAsBox(1.0f, 1.0f);
-		//Creates a fixture and adds it to the body
+		//Creates a fixture definition using the box.
 		FixtureDef fixtureDef = new FixtureDef();
-		//the shape of the fixture is the polygon
 		fixtureDef.shape = dynamicBox;
 		fixtureDef.density = 1.0f;
 		fixtureDef.friction = 0.3f;
@@ -37,14 +33,15 @@ public class test {
 		int positionIterations = 2;
 		//runs the program, prints out the position of a box falling
 		for (int i = 0; i < 60; ++i)
+
 		{
+
 		    world.step(timeStep, velocityIterations, positionIterations);
+
 		    Vec2 position = body.getPosition();
+
 		    float angle = body.getAngle();
-		    if(position.y < 0) {
-		    world.destroyBody(body);
-		    break;
-		    }
+
 		    System.out.printf("%4.2f %4.2f %4.2f\n", position.x, position.y, angle);
 
 		}
