@@ -1,4 +1,6 @@
 import jbox2d.dynamics.*;
+import java.awt.*;
+import javax.swing.*;
 
 import jbox2d.collision.shapes.*;
 import jbox2d.common.*;
@@ -11,6 +13,7 @@ public class test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		JLabel label = new JLabel();
 		//sets the gravity vector for the world
 		Vec2 gravity = new Vec2(0.0f, -10.0f);
 		//creates the world
