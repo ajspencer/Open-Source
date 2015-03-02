@@ -13,7 +13,7 @@ public class test {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		JLabel label = new JLabel();
+		testGraphics graphics = new testGraphics();
 		//sets the gravity vector for the world
 		Vec2 gravity = new Vec2(0.0f, -10.0f);
 		//creates the world
