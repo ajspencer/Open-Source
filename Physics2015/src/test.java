@@ -88,8 +88,9 @@ public class test extends JFrame implements Runnable{
 	
 	public static void main(String[] args) 
 	{
-		test TestFrame = new test();
-		javax.swing.SwingUtilities.invokeLater(TestFrame);
+		//test TestFrame = new test();
+		kinematics KinematicsFrame = new kinematics();
+		javax.swing.SwingUtilities.invokeLater(KinematicsFrame);
 
 	}
 ///*****************Inner Panel**********************/
