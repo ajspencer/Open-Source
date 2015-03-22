@@ -1,0 +1,47 @@
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import java.awt.Container;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.Font;
+
+public class Menu extends JFrame implements Runnable
+{
+    JTextField display;
+    public Menu()
+    {
+        super("Physics Simulation");
+    }
+
+    private JPanel generateOptions()
+    {
+        JPanel out = new JPanel(new GridLayout(3,1));
+        JButton Forces = new JButton("Forces");
+        JButton Dvat = new JButton("DVATs");
+        JButton Energy = new JButton("Energy");
+        Energy.addActionListener( e -> {
+        	javax.swing.SwingUtilities.invokeLater(new Energy());
+        });
+        out.add(Forces);
+        out.add(Dvat);
+        out.add(Energy);
+        return out;
+    }
+    public void run()
+    {
+        setSize(500,500);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        Container c = getContentPane();
+        c.add(BorderLayout.CENTER, generateOptions());
+        setVisible(true);
+    }
+    public static void main(String [] args)
+    {
+        javax.swing.SwingUtilities.invokeLater(new Menu());
+    }
+    
+    }
+

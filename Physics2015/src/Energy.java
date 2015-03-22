@@ -48,7 +48,7 @@ public class Energy extends JFrame implements Runnable
 			createFirstPanel();
 		});
 		menuButton.addActionListener( e-> {
-			this.dispose();
+	        	javax.swing.SwingUtilities.invokeLater(new Menu());
 		});
 		setVisible(true);
 	}
