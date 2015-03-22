@@ -343,11 +343,6 @@ public class Energy extends JFrame implements Runnable
 		tenthFrame.setVisible(true);
 	}
 	
-	public static void main(String[] args)
-	{
-		Energy EN = new Energy();
-		javax.swing.SwingUtilities.invokeLater(EN);
-	}
 	
 	public void runSim1()
 	{

@@ -47,7 +47,7 @@ public class kinematics extends JFrame implements Runnable
 			createFirstPanel();
 		});
 		menuButton.addActionListener( e-> {
-			this.dispose();
+			javax.swing.SwingUtilities.invokeLater(new Menu());
 		});
 		setVisible(true);
 	}
@@ -337,12 +337,6 @@ public class kinematics extends JFrame implements Runnable
 			tenthFrame.dispose();
 		});
 		tenthFrame.setVisible(true);
-	}
-	
-	public static void main(String[] args)
-	{
-		kinematics k = new kinematics();
-		javax.swing.SwingUtilities.invokeLater(k);
 	}
 	
 	public void runSim1()

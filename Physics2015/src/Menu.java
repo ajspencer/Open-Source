@@ -18,14 +18,16 @@ public class Menu extends JFrame implements Runnable
 
     private JPanel generateOptions()
     {
-        JPanel out = new JPanel(new GridLayout(3,1));
+        JPanel out = new JPanel(new GridLayout(2,1));
         JButton Forces = new JButton("Forces");
         JButton Dvat = new JButton("DVATs");
         JButton Energy = new JButton("Energy");
         Energy.addActionListener( e -> {
         	javax.swing.SwingUtilities.invokeLater(new Energy());
         });
-        out.add(Forces);
+        Dvat.addActionListener( e -> {
+        	javax.swing.SwingUtilities.invokeLater(new kinematics());
+        });
         out.add(Dvat);
         out.add(Energy);
         return out;
