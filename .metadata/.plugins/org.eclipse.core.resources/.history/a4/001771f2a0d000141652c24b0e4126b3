@@ -18,7 +18,7 @@ public class Menu extends JFrame implements Runnable
 
     private JPanel generateOptions()
     {
-        JPanel out = new JPanel(new GridLayout(3,1));
+        JPanel out = new JPanel(new GridLayout(2,1));
         JButton Forces = new JButton("Forces");
         JButton Dvat = new JButton("DVATs");
         JButton Energy = new JButton("Energy");
@@ -28,12 +28,8 @@ public class Menu extends JFrame implements Runnable
         Dvat.addActionListener( e -> {
         	javax.swing.SwingUtilities.invokeLater(new kinematics());
         });
-        Dvat.addActionListener( e -> {
-        	javax.swing.SwingUtilities.invokeLater(new forces());
-        });
         out.add(Dvat);
         out.add(Energy);
-        out.add(Forces);
         return out;
     }
     public void run()

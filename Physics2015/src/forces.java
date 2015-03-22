@@ -1,0 +1,717 @@
+import jbox2d.dynamics.*;
+
+import java.util.*;
+import java.awt.*;
+
+import javax.swing.*;
+
+//import test.SimPanel;
+import jbox2d.collision.shapes.*;
+import jbox2d.common.*;
+public class forces extends JFrame implements Runnable
+{
+	//ArrayList<JFrame> listOfFrames= new ArrayList<>();
+	Font textf = new Font("Display",Font.PLAIN,18);
+	Font headerf = new Font("Display",Font.PLAIN,24);
+	int baseX = 0;
+	int baseY = 0;
+	boolean runningSim2 = false;
+	ArrayList<Float> yPositionList = new ArrayList<Float>(); 
+	ArrayList<Float> xPositionList = new ArrayList<Float>();
+	ArrayList<Float> yVelocityList = new ArrayList<Float>(); 
+	ArrayList<Float> xVelocityList = new ArrayList<Float>();
+	int posCounter;
+	public forces()
+	{
+		super("forces Module");
+		posCounter = 0;
+	}
+	
+	public void run()
+	{
+		setSize(500,500);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Container c = getContentPane();
+		//create starting text panel here
+		JTextArea startTextPane = new JTextArea();
+		startTextPane.setEditable(false);
+		startTextPane.setLineWrap(true);
+		startTextPane.setWrapStyleWord(true);
+		startTextPane.setFont(textf);
+		startTextPane.setText("Welcome to Physics Simulator and Learning Modules! In this we will work to show you the most important concepts behind mechanical physics! First, welcome to the forces Module! In this module, you will learn about the ideas and concepts of forces. Press start when you are ready to go, or back if you want to try another one.");
+		c.add(BorderLayout.NORTH, startTextPane);
+		JButton startButton = new JButton("START");
+		JButton menuButton = new JButton("BACK TO MENU");
+		c.add(BorderLayout.CENTER,startButton);
+		c.add(BorderLayout.SOUTH,menuButton);
+		startButton.addActionListener( e-> {
+			createFirstPanel();
+		});
+		menuButton.addActionListener( e-> {
+			javax.swing.SwingUtilities.invokeLater(new Menu());
+			this.dispose();
+		});
+		setVisible(true);
+	}
+	
+	public void fixPanel(JTextArea jta, Font f) //this makes the jtextarea nicer to look at/use
+	{
+		jta.setFont(f);
+		jta.setEditable(false);
+		jta.setLineWrap(true);
+		jta.setWrapStyleWord(true);
+	}
+	
+	public void createFirstPanel()
+	{
+		JFrame firstFrame = new JFrame("1");
+		firstFrame.setSize(500,500);
+		Container c = firstFrame.getContentPane();
+		JButton backButton = new JButton("BACK");
+		JButton nextButton = new JButton("NEXT");
+		c.add(BorderLayout.WEST, backButton);
+		c.add(BorderLayout.EAST, nextButton);
+		JTextArea firstTextPane = new JTextArea("So what is a force? \n A force is a push or pull on a object due to another object. It is measure in Newtons (N) which can be expressed in kg*m/s^2. Click on to hear about the numerous different types of forces!");
+		fixPanel(firstTextPane, textf);
+		c.add(BorderLayout.CENTER, firstTextPane);
+		backButton.addActionListener(e->{
+			firstFrame.dispose();
+		});
+		nextButton.addActionListener(e->{
+			//posCounter++;
+			createSecondPanel();
+			firstFrame.dispose();
+		});
+		firstFrame.setVisible(true);
+	}
+	
+	public void createSecondPanel()
+	{
+	JFrame secondFrame = new JFrame("2");
+		secondFrame.setSize(500,500);
+		Container c = secondFrame.getContentPane();
+		JButton backButton = new JButton("BACK");
+		JButton nextButton = new JButton("NEXT");
+		c.add(BorderLayout.WEST, backButton);
+		c.add(BorderLayout.EAST, nextButton);
+		JTextArea secondTextPane = new JTextArea("1. Contact Forces: Forces due to the direct contact between two objects. This is like when you kick a ball, you apply a contact force onto the ball \n 2. Frictional Forces: This is a force that goes against motion, such as when you try to drag your feet across the floor, there is a force preventing you from freely sliding. Try it now! \n 3. Tension Forces: The force a string exerts on what it is holding up \n 4. Normal Forces: A pushing force back. When you site on the ground, the ground pushed back at you with a normal force. \n 5. Air Resistance Forces: A sort of frictional force caused by the air.");
+			//	System.out.println(firstTextPane.getFont());
+		fixPanel(secondTextPane, textf);
+		c.add(BorderLayout.CENTER, secondTextPane);
+		backButton.addActionListener(e->{
+			createFirstPanel();
+			secondFrame.dispose();
+		});
+		nextButton.addActionListener(e->{
+			//posCounter++;
+			//createSecondPanel();
+			createThirdPanel();
+			secondFrame.dispose();
+		});
+		secondFrame.setVisible(true);
+	}
+	
+	public void createThirdPanel()
+	{
+		JFrame thirdFrame = new JFrame("3");
+		thirdFrame.setSize(500,500);
+		Container c = thirdFrame.getContentPane();
+		JButton backButton = new JButton("BACK");
+		JButton nextButton = new JButton("NEXT");
+		c.add(BorderLayout.WEST, backButton);
+		c.add(BorderLayout.EAST, nextButton);
+		JTextArea thirdTextPane = new JTextArea("Mass vs Weight \n The equation for the net force on a system is F = ma, where F is the force, m is the mass and a is the acceleration. It is very easy to get the concepts of mass and wieght confused, but there is a key difference. Mass is the amount of matter within an object, while wieght is the magnitude of the force of gravity on the object. So with g = 9.8m/s^2, the wieght of an object is 9.8 times its mass.");
+//			System.out.println(firstTextPane.getFont());
+		fixPanel(thirdTextPane, textf);
+		//runSim1();
+	//	c.add(new SimPanel());
+		c.add(BorderLayout.CENTER, thirdTextPane);
+		backButton.addActionListener(e->{
+			createSecondPanel();
+			thirdFrame.dispose();
+		});
+		nextButton.addActionListener(e->{
+			//posCounter++;
+			createFourthPanel();
+			thirdFrame.dispose();
+		});
+		thirdFrame.setVisible(true);
+	}
+//	runSim1();
+//	c.add(new SimPanel());
+	public void createFourthPanel()
+	{
+		JFrame fourthFrame = new JFrame("4");
+		fourthFrame.setSize(500,500);
+		Container c = fourthFrame.getContentPane();
+		JButton backButton = new JButton("BACK");
+		JButton nextButton = new JButton("NEXT");
+		c.add(BorderLayout.WEST, backButton);
+		c.add(BorderLayout.EAST, nextButton);
+		JTextArea fourthTextPane = new JTextArea("Gravitational force \n Look at the block below. It is falling because the only force acting on it is the force of gravity due to the earth. This force causes the block to accelerate downwards. In the next page you will see what happens when multiple forces act on the same object.");
+//			System.out.println(firstTextPane.getFont());
+		fixPanel(fourthTextPane, textf);
+		runSim1();
+		c.add(new SimPanel());
+		c.add(BorderLayout.NORTH, fourthTextPane);
+		backButton.addActionListener(e->{
+			createThirdPanel();
+			fourthFrame.dispose();
+		});
+		nextButton.addActionListener(e->{
+			//posCounter++;
+			createFifthPanel();
+			fourthFrame.dispose();
+		});
+		fourthFrame.setVisible(true);
+	}
+	
+	public void createFifthPanel()
+	{
+		JFrame fourthFrame = new JFrame("5");
+		fourthFrame.setSize(500,500);
+		Container c = fourthFrame.getContentPane();
+		JButton backButton = new JButton("BACK");
+		JButton nextButton = new JButton("NEXT");
+		c.add(BorderLayout.WEST, backButton);
+		c.add(BorderLayout.EAST, nextButton);
+		JTextArea fourthTextPane = new JTextArea("In this example, there is a force going upwards against the previously shown force of gravity. This force lessed the total force going downwards and thus the block moves slower when going down. ");
+//			System.out.println(firstTextPane.getFont());
+		fixPanel(fourthTextPane, textf);
+		runSim2();
+		c.add(new SimPanel());
+		c.add(BorderLayout.NORTH, fourthTextPane);
+		backButton.addActionListener(e->{
+			createFourthPanel();
+			fourthFrame.dispose();
+		});
+		nextButton.addActionListener(e->{
+			//posCounter++;
+			createSixthPanel();
+			fourthFrame.dispose();
+		});
+		fourthFrame.setVisible(true);
+	}
+	
+	/*public void createFifthPanel()
+	{
+		JFrame fifthFrame = new JFrame("5");
+		fifthFrame.setSize(500,500);
+		Container c = fifthFrame.getContentPane();
+		JButton backButton = new JButton("BACK");
+		JButton nextButton = new JButton("NEXT");
+		c.add(BorderLayout.WEST, backButton);
+		c.add(BorderLayout.EAST, nextButton);
+		JTextArea fifthTextPane = new JTextArea("More specifically, the type of potential energy related to height and gravity is called gravitational potential energy.\n"
+				+ "This energy is stored in the object based on its height. The mathermatical formula for graviational potential energy, or U, is:\n"
+				+ "U = m*g*h\n"
+				+ "m is the mass of the object in kilograms, g is the gravitational field constant on Earth, or 9.8 N/kg, and h is the objects height in meters.");
+//			System.out.println(firstTextPane.getFont());
+		fixPanel(fifthTextPane, textf);
+		c.add(BorderLayout.CENTER, fifthTextPane);
+		backButton.addActionListener(e->{
+			createFourthPanel();
+			fifthFrame.dispose();
+		});
+		nextButton.addActionListener(e->{
+			//posCounter++;
+			createSixthPanel();
+			fifthFrame.dispose();
+		});
+		fifthFrame.setVisible(true);
+	}*/
+	
+	public void createSixthPanel()
+	{
+		JFrame sixthFrame = new JFrame("6");
+		sixthFrame.setSize(500,500);
+		Container c = sixthFrame.getContentPane();
+		JButton backButton = new JButton("BACK");
+		JButton nextButton = new JButton("NEXT");
+		c.add(BorderLayout.WEST, backButton);
+		c.add(BorderLayout.EAST, nextButton);
+		JTextArea sixthTextPane = new JTextArea("So, you have seen what happens when two forces oppose eachother. Now time for a quick question. If I had a 5N force going left, and a 10N force going right, on the same object, what would be the magnitude and direction of my net force? Move on to check your answer");
+//			System.out.println(firstTextPane.getFont());
+		fixPanel(sixthTextPane, textf);
+		c.add(BorderLayout.CENTER, sixthTextPane);
+		backButton.addActionListener(e->{
+			createFifthPanel();
+			sixthFrame.dispose();
+		});
+		nextButton.addActionListener(e->{
+			//posCounter++;
+			createSeventhPanel();
+			sixthFrame.dispose();
+		});
+		sixthFrame.setVisible(true);
+	}
+	public void createSeventhPanel()
+	{
+		JFrame seventhFrame = new JFrame("7");
+		seventhFrame.setSize(500,500);
+		Container c = seventhFrame.getContentPane();
+		JButton backButton = new JButton("BACK");
+		JButton nextButton = new JButton("NEXT");
+		c.add(BorderLayout.WEST, backButton);
+		c.add(BorderLayout.EAST, nextButton);
+		JTextArea seventhTextPane = new JTextArea("The correct answer is we would have a 5N force going right. This is because the 5N force going left is cancelled out by 5N of force going right, and even after those 5N are gone, there are still 5N more to move the object. Here is another question. What net force would I have, if I put a 10N force going left, and a 10N force going right on an object?");
+//			System.out.println(firstTextPane.getFont());
+		fixPanel(seventhTextPane, textf);
+		runSim3();
+		c.add(new SimPanel());
+		c.add(BorderLayout.NORTH, seventhTextPane);
+		backButton.addActionListener(e->{
+			createSixthPanel();
+			seventhFrame.dispose();
+		});
+		nextButton.addActionListener(e->{
+			//posCounter++;
+			createEighthPanel();
+			seventhFrame.dispose();
+		});
+		seventhFrame.setVisible(true);
+	}
+	/*
+	public void createSeventhPanel()
+	{
+		JFrame seventhFrame = new JFrame("7");
+		seventhFrame.setSize(500,500);
+		Container c = seventhFrame.getContentPane();
+		JButton backButton = new JButton("BACK");
+		JButton nextButton = new JButton("NEXT");
+		c.add(BorderLayout.WEST, backButton);
+		c.add(BorderLayout.EAST, nextButton);
+		JTextArea seventhTextPane = new JTextArea("The other big type of energy to consider would be kinetic energy. Kinetic energy is possessed by objects that move.\n"
+				+ "Kinetic energy, or KE, is defined as\nKE = 0.5*m*v^2, where m is still the mass in kilograms and v is the velocity in meters per second.\n"
+				+ "So, the kinetic energy of a 2 kg block moving at 5 m/s is:\n"
+				+ "KE = 0.5*(2 kg)*(5m/s)^2 = 25J");
+//			System.out.println(firstTextPane.getFont());
+		fixPanel(seventhTextPane, textf);
+		c.add(BorderLayout.CENTER, seventhTextPane);
+		backButton.addActionListener(e->{
+			createSixthPanel();
+			seventhFrame.dispose();
+		});
+		nextButton.addActionListener(e->{
+			//posCounter++;
+			createEighthPanel();
+			seventhFrame.dispose();
+		});
+		seventhFrame.setVisible(true);
+	}*/
+	public void createEighthPanel()
+	{
+		JFrame eighthFrame = new JFrame("8");
+		eighthFrame.setSize(500,500);
+		Container c = eighthFrame.getContentPane();
+		JButton backButton = new JButton("BACK");
+		JButton nextButton = new JButton("NEXT");
+		c.add(BorderLayout.WEST, backButton);
+		c.add(BorderLayout.EAST, nextButton);
+		JTextArea eighthTextPane = new JTextArea("The correct answer to this question is that the block will not move at all, because there is no net force acting on the block. Both the 10N forces are in opposite directions, so they cancel one another out, and the block stays put. ");
+//			System.out.println(firstTextPane.getFont());
+		fixPanel(eighthTextPane, textf);
+		runSim4();
+		c.add(new SimPanel());
+		c.add(BorderLayout.NORTH, eighthTextPane);
+		backButton.addActionListener(e->{
+			createSeventhPanel();
+			eighthFrame.dispose();
+		});
+		nextButton.addActionListener(e->{
+			//posCounter++;
+			createNinthPanel();
+			eighthFrame.dispose();
+		});
+		eighthFrame.setVisible(true);
+	}
+	public void createNinthPanel()
+	{
+		JFrame ninthFrame = new JFrame("9");
+		ninthFrame.setSize(500,500);
+		Container c = ninthFrame.getContentPane();
+		JButton backButton = new JButton("BACK");
+		JButton nextButton = new JButton("NEXT");
+		c.add(BorderLayout.WEST, backButton);
+		c.add(BorderLayout.EAST, nextButton);
+		JTextArea ninthTextPane = new JTextArea("Newton's Second Law of Motion states that the net force on any system is equal to the mass (m) of the system, time its acceleration (a). Let's try some calculations for this. \n 1. M: 5kg  A: 10 m/s^2 \n 2. M: 2kg  A: 80 m/s^2 \n 3. M: 4kg  A: 11 m/s^2 \n 4. M: 15kg  A: 1 m/s^2");
+//			System.out.println(firstTextPane.getFont());
+		fixPanel(ninthTextPane, textf);
+		c.add(BorderLayout.CENTER, ninthTextPane);
+		backButton.addActionListener(e->{
+			createEighthPanel();
+			ninthFrame.dispose();
+		});
+		nextButton.addActionListener(e->{
+			//posCounter++;
+			createTenthPanel();
+			ninthFrame.dispose();
+		});
+		ninthFrame.setVisible(true);
+	}
+	public void createTenthPanel()
+	{
+		JFrame ninthFrame = new JFrame("10");
+		ninthFrame.setSize(500,500);
+		Container c = ninthFrame.getContentPane();
+		JButton backButton = new JButton("BACK");
+		JButton nextButton = new JButton("NEXT");
+		c.add(BorderLayout.WEST, backButton);
+		c.add(BorderLayout.EAST, nextButton);
+		JTextArea ninthTextPane = new JTextArea("Answers are \n 1. 50N \n 2. 160N \n 3. 44N \n 4. 15N \n These examples illustrate the basics of forces, but in reality forces dont only move in one direction. Let's look at some 2 dimensional examples. ");
+//			System.out.println(firstTextPane.getFont());
+		fixPanel(ninthTextPane, textf);
+		c.add(BorderLayout.CENTER, ninthTextPane);
+		backButton.addActionListener(e->{
+			createNinthPanel();
+			ninthFrame.dispose();
+		});
+		nextButton.addActionListener(e->{
+			//posCounter++;
+			createEleventhPanel();
+			ninthFrame.dispose();
+		});
+		ninthFrame.setVisible(true);
+	}
+	public void createEleventhPanel()
+	{
+		JFrame eighthFrame = new JFrame("8");
+		eighthFrame.setSize(500,500);
+		Container c = eighthFrame.getContentPane();
+		JButton backButton = new JButton("BACK");
+		JButton nextButton = new JButton("NEXT");
+		c.add(BorderLayout.WEST, backButton);
+		c.add(BorderLayout.EAST, nextButton);
+		JTextArea eighthTextPane = new JTextArea("Seen below is an example of both a downward and leftwards force acting on a object.  ");
+//			System.out.println(firstTextPane.getFont());
+		fixPanel(eighthTextPane, textf);
+		runSim6();
+		c.add(new SimPanel());
+		c.add(BorderLayout.NORTH, eighthTextPane);
+		backButton.addActionListener(e->{
+			createTenthPanel();
+			eighthFrame.dispose();
+		});
+		nextButton.addActionListener(e->{
+			//posCounter++;
+			createTwelvethPanel();
+			eighthFrame.dispose();
+		});
+		eighthFrame.setVisible(true);
+	}
+	public void createTwelvethPanel()
+	{
+		JFrame tenthFrame = new JFrame("10");
+		tenthFrame.setSize(500,500);
+		Container c = tenthFrame.getContentPane();
+		JButton backButton = new JButton("BACK");
+		JButton nextButton = new JButton("END");
+		c.add(BorderLayout.WEST, backButton);
+		c.add(BorderLayout.EAST, nextButton);
+		JTextArea tenthTextPane = new JTextArea("So, we have seen the application of the different forms of forces on different objects and together have calculated net force. This idea of net force in fundamental to physics, as is the equation F=ma. Next up are the kinematics and energy modules!");
+//			System.out.println(firstTextPane.getFont());
+		fixPanel(tenthTextPane, textf);
+		c.add(BorderLayout.CENTER, tenthTextPane);
+		backButton.addActionListener(e->{
+			createEleventhPanel();
+			tenthFrame.dispose();
+		});
+		nextButton.addActionListener(e->{
+			//posCounter++;
+			//createtenthPanel();
+			tenthFrame.dispose();
+		});
+		tenthFrame.setVisible(true);
+	}
+	
+	
+	
+	public void runSim1()
+	{
+		xVelocityList.clear();
+		yVelocityList.clear();
+		Vec2 rightMove = new Vec2(0.0f, -3.0f);
+		//creates the world
+		World world = new World(rightMove);
+		//creates a body
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.DYNAMIC;
+		bodyDef.position.set(0.0f, 4.0f);
+		Body body = world.createBody(bodyDef);
+		//Creates a polygon shape
+		PolygonShape dynamicBox = new PolygonShape();
+		dynamicBox.setAsBox(1.0f, 1.0f);
+		float timeStep = 1.0f / 60.0f;
+		//suggested default values
+		int velocityIterations = 6;
+		int positionIterations = 2;
+		//runs the program, prints out the position of a box falling
+		for (int i = 0; i < 70; ++i)
+		{
+		    world.step(timeStep, velocityIterations, positionIterations);
+		    Vec2 position = body.getPosition();
+		    Vec2 velocity = body.getLinearVelocity();
+		    float angle = body.getAngle();
+		    
+		    //use something like the above for positions
+		    xVelocityList.add(velocity.x);
+		    yVelocityList.add(velocity.y);
+		//    System.out.printf("%4.2f %4.2f %4.2f\n", velocity.x, velocity.y, angle);
+		    //everything in the movement uses velocity to move
+		    //make an arraylist of velocity values
+		}
+		baseX = 150;
+		baseY = 150;
+	}
+	public void runSim2()
+	{
+		xVelocityList.clear();
+		yVelocityList.clear();
+		Vec2 rightMove = new Vec2(0.0f, -3f);
+		//creates the world
+		World world = new World(rightMove);
+		//creates a body
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.DYNAMIC;
+		bodyDef.position.set(0.0f, 4.0f);
+		Body body = world.createBody(bodyDef);
+		//Creates a polygon shape
+		PolygonShape dynamicBox = new PolygonShape();
+		dynamicBox.setAsBox(1.0f, 1.0f);
+		float timeStep = 1.0f / 100.0f;
+		//suggested default values
+		int velocityIterations = 6;
+		int positionIterations = 2;
+		//runs the program, prints out the position of a box falling
+		for (int i = 0; i < 99; ++i)
+		{
+		    world.step(timeStep, velocityIterations, positionIterations);
+		    Vec2 position = body.getPosition();
+		    Vec2 velocity = body.getLinearVelocity();
+		    float angle = body.getAngle();
+		    
+		    //use something like the above for positions
+		    xVelocityList.add(velocity.x);
+		    yVelocityList.add(velocity.y);
+		//    System.out.printf("%4.2f %4.2f %4.2f\n", velocity.x, velocity.y, angle);
+		    //everything in the movement uses velocity to move
+		    //make an arraylist of velocity values
+		}
+		baseX = 150;
+		baseY = 150;
+	}
+	public void runSim3()
+	{
+		xVelocityList.clear();
+		yVelocityList.clear();
+		Vec2 rightMove = new Vec2(3.0f, 0.0f);
+		//creates the world
+		World world = new World(rightMove);
+		//creates a body
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.DYNAMIC;
+		bodyDef.position.set(0.0f, 4.0f);
+		Body body = world.createBody(bodyDef);
+		//Creates a polygon shape
+		PolygonShape dynamicBox = new PolygonShape();
+		dynamicBox.setAsBox(1.0f, 1.0f);
+		float timeStep = 1.0f / 100.0f;
+		//suggested default values
+		int velocityIterations = 6;
+		int positionIterations = 2;
+		//runs the program, prints out the position of a box falling
+		for (int i = 0; i < 99; ++i)
+		{
+		    world.step(timeStep, velocityIterations, positionIterations);
+		    Vec2 position = body.getPosition();
+		    Vec2 velocity = body.getLinearVelocity();
+		    float angle = body.getAngle();
+		    
+		    //use something like the above for positions
+		    xVelocityList.add(velocity.x);
+		    yVelocityList.add(velocity.y);
+		//    System.out.printf("%4.2f %4.2f %4.2f\n", velocity.x, velocity.y, angle);
+		    //everything in the movement uses velocity to move
+		    //make an arraylist of velocity values
+		}
+		baseX = 150;
+		baseY = 150;
+	}
+	public void runSim4()
+	{
+		xVelocityList.clear();
+		yVelocityList.clear();
+		Vec2 rightMove = new Vec2(0.0f, 0.0f);
+		//creates the world
+		World world = new World(rightMove);
+		//creates a body
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.DYNAMIC;
+		bodyDef.position.set(0.0f, 4.0f);
+		Body body = world.createBody(bodyDef);
+		//Creates a polygon shape
+		PolygonShape dynamicBox = new PolygonShape();
+		dynamicBox.setAsBox(1.0f, 1.0f);
+		float timeStep = 1.0f / 100.0f;
+		//suggested default values
+		int velocityIterations = 6;
+		int positionIterations = 2;
+		//runs the program, prints out the position of a box falling
+		for (int i = 0; i < 99; ++i)
+		{
+		    world.step(timeStep, velocityIterations, positionIterations);
+		    Vec2 position = body.getPosition();
+		    Vec2 velocity = body.getLinearVelocity();
+		    float angle = body.getAngle();
+		    
+		    //use something like the above for positions
+		    xVelocityList.add(velocity.x);
+		    yVelocityList.add(velocity.y);
+		//    System.out.printf("%4.2f %4.2f %4.2f\n", velocity.x, velocity.y, angle);
+		    //everything in the movement uses velocity to move
+		    //make an arraylist of velocity values
+		}
+		baseX = 150;
+		baseY = 150;
+	}
+	public void runSim6()
+	{
+		xVelocityList.clear();
+		yVelocityList.clear();
+		Vec2 rightMove = new Vec2(-1.0f, -2.0f);
+		//creates the world
+		World world = new World(rightMove);
+		//creates a body
+		BodyDef bodyDef = new BodyDef();
+		bodyDef.type = BodyType.DYNAMIC;
+		bodyDef.position.set(0.0f, 4.0f);
+		Body body = world.createBody(bodyDef);
+		//Creates a polygon shape
+		PolygonShape dynamicBox = new PolygonShape();
+		dynamicBox.setAsBox(1.0f, 1.0f);
+		float timeStep = 1.0f / 100.0f;
+		//suggested default values
+		int velocityIterations = 6;
+		int positionIterations = 2;
+		//runs the program, prints out the position of a box falling
+		for (int i = 0; i < 99; ++i)
+		{
+		    world.step(timeStep, velocityIterations, positionIterations);
+		    Vec2 position = body.getPosition();
+		    Vec2 velocity = body.getLinearVelocity();
+		    float angle = body.getAngle();
+		    
+		    //use something like the above for positions
+		    xVelocityList.add(velocity.x);
+		    yVelocityList.add(velocity.y);
+		//    System.out.printf("%4.2f %4.2f %4.2f\n", velocity.x, velocity.y, angle);
+		    //everything in the movement uses velocity to move
+		    //make an arraylist of velocity values
+		}
+		baseX = 150;
+		baseY = 150;
+	}
+		public void runSim5()
+		{
+			runningSim2 =true;
+			xVelocityList.clear();
+			yVelocityList.clear();
+			Vec2 gravity = new Vec2(0f, -10.0f);
+			//creates the world
+			World world = new World(gravity);
+			//creates a body
+			BodyDef bodyDef = new BodyDef();
+			bodyDef.type = BodyType.DYNAMIC;
+			bodyDef.position.set(0.0f, 4.0f);
+			Body body = world.createBody(bodyDef);
+			//Creates a polygon shape
+			PolygonShape dynamicBox = new PolygonShape();
+			dynamicBox.setAsBox(1.0f, 1.0f);
+			float timeStep = 1.0f / 60.0f;
+			//suggested default values
+			int velocityIterations = 6;
+			int positionIterations = 2;
+			//runs the program, prints out the position of a box falling
+			for (int i = 0; i < 100; ++i)
+			{
+			    world.step(timeStep, velocityIterations, positionIterations);
+			    Vec2 position = body.getPosition();
+			    Vec2 velocity = body.getLinearVelocity();
+			    float angle = body.getAngle();
+			    
+			    //use something like the above for positions
+			    xVelocityList.add(velocity.x);
+			    yVelocityList.add(velocity.y);
+			 //   System.out.printf("%4.2f %4.2f %4.2f\n", velocity.x, velocity.y, angle);
+			    //everything in the movement uses velocity to move
+			    //make an arraylist of velocity values
+			}
+			baseX = 175;
+			baseY = 150;
+	}
+	
+	///*****************Inner Panel**********************/
+
+		class SimPanel extends JComponent
+		{
+			private int lastY = baseY;
+			private int lastX = baseX;
+			private int a = 0; // this is used to keep track of the new velocities
+			public SimPanel()
+			{ //the trick here is to create this Thread that only tells the window to redraw
+				//on each redraw, recalc the new positions and draw 
+				Thread animationThread = new Thread(new Runnable() 
+				{
+		            public void run() 
+		            {
+		                while (true) 
+		                {
+		                    repaint();
+		                    try 
+		                    {
+		                    Thread.sleep(10);
+		                    a++; //on each execution, move in the velocity list
+		                    //System.out.println()
+		                    } catch (InterruptedException ex) {}
+		                }
+		            }
+		        });
+
+		        animationThread.start();
+			}
+			@Override
+			public void paintComponent(Graphics g)
+			{
+				Graphics2D g2d = (Graphics2D) g;
+				int boxSpeedY = 0 ; //initialize this here for the try block
+				int boxSpeedX = 0 ; 
+		        int w = getWidth();
+		        int h = getHeight();
+		        //int a =0;
+		        
+		        int boxW = 50;
+		        int boxH = 50;
+		        try    
+		        { 
+		        	boxSpeedY = Math.round(-1*yVelocityList.get(a));
+		        	//adjusts the velocities since JFrame is upside down with the -1
+		        	boxSpeedX = Math.round(xVelocityList.get(a));
+		        }
+		        catch (IndexOutOfBoundsException aex)
+		        {
+		        	
+		        }
+		        	//changes velocities
+		        int y = lastY + boxSpeedY; //adjusts for the new speed
+		        int x = lastX + boxSpeedX;
+		        g2d.setColor(Color.BLACK);
+		        g2d.fillRect(x, y, boxW, boxH);
+
+		        lastY = y;
+		        lastX = x;
+		        //readjusts
+		        
+		        //next loop runs here
+		    }
+		}
+}

@@ -28,9 +28,6 @@ public class Menu extends JFrame implements Runnable
         Dvat.addActionListener( e -> {
         	javax.swing.SwingUtilities.invokeLater(new kinematics());
         });
-        Dvat.addActionListener( e -> {
-        	javax.swing.SwingUtilities.invokeLater(new forces());
-        });
         out.add(Dvat);
         out.add(Energy);
         out.add(Forces);
