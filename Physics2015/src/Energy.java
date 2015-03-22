@@ -188,7 +188,7 @@ public class Energy extends JFrame implements Runnable
 		JTextArea fifthTextPane = new JTextArea("More specifically, the type of potential energy related to height and gravity is called gravitational potential energy.\n"
 				+ "This energy is stored in the object based on its height. The mathermatical formula for graviational potential energy, or U, is:\n"
 				+ "U = m*g*h\n"
-				+ "m is the mass of the object in kilograms, g is the gravitational field constant on Earth, or 9.8 N/kg, and h is the objects height in meters.");
+				+ "m is the mass of the object in kilograms, g is the gravitational field constant on Earth, or 9.8 N/kg, and h is the object's height in meters.");
 //			System.out.println(firstTextPane.getFont());
 		fixPanel(fifthTextPane, textf);
 		c.add(BorderLayout.CENTER, fifthTextPane);
